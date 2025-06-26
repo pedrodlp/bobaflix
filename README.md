@@ -41,3 +41,9 @@ Stack:
         Backend: Pass those params to the yelp api and return results to frontend.
         
     2. Quick and dirty is to just load all results and send to frontend and just have “pagination” in the table view. THIS WOULD BE ONLY IF I AM RUNNING OUT OF TIME.
+
+
+    ### Random comments
+
+    - Decided to go with axios instead of the yelp api package.
+    - Cant live without hot reload!
