@@ -47,3 +47,4 @@ Stack:
 
     - Decided to go with axios instead of the yelp api package.
     - Cant live without hot reload!
+    - time spent on BE so far and first project pause 1 hour
