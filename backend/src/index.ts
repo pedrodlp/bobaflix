@@ -21,15 +21,17 @@ app.get("/", (req, res) => {
 
 app.get("/api/boba", async (req: Request, res: Response) => {
 	try {
-		const { location, limit = "20", offset = "0", sort_by } = req.query;
+		const { location, limit, offset, sort_by, radius } = req.query;
+
+		const realLimit = limit && limit !== "" ? limit : "20";
+		const realOffset = offset && offset !== "" ? offset : "0";
+		const realRadius = radius && radius !== "" ? radius : "10000";
+
 		const apiKey = process.env.YELP_API_KEY ? process.env.YELP_API_KEY : "";
 
-		// console.log("location ", location);
-
-		const parsedLimit = Number(limit);
-		// console.log("parsedLimit ", parsedLimit);
-		const parsedOffset = Number(offset);
-		// console.log("parsedOffset ", parsedOffset);
+		const parsedLimit = Number(realLimit);
+		const parsedOffset = Number(realOffset);
+		const parsedRadius = Number(realRadius);
 
 		if (!apiKey) {
 			return res.status(500).json({
@@ -59,12 +61,16 @@ app.get("/api/boba", async (req: Request, res: Response) => {
 				term: "boba",
 				sort_by: sort,
 				location,
-				parsedLimit,
-				parsedOffset,
+				limit: parsedLimit,
+				offset: parsedOffset,
+				radius: parsedRadius,
 			},
 		};
+		// console.log(options.params);
 
 		const yelpResponse = await axios(options);
+
+		// console.log("total ", yelpResponse.data.total);
 
 		res.json(yelpResponse.data);
 	} catch (error: any) {

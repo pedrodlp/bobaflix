@@ -2,10 +2,22 @@
 
 This is a small React + Node.js app that uses Yelp Business Search to let users know where to get boba close to their office.
 
-This is set up with pnpm as package manager.
-To run it locally you need to clone the repo and run:
+# To run it locally you need to clone the repo and run:
 
-here goes how to run it.
+- Frontend:
+    - cd into /frontend
+    - run:
+    ```
+    pnpm dev-fe
+    ```
+
+- Backend:
+    - cd into /backend
+    - put your yelp api key into the `.env` file
+    - run:
+    ```
+    pnpm dev-be
+    ```
 
 ## How I approached and tackled this mini project:
 
@@ -31,20 +43,20 @@ Stack:
     
     Thinking about pagination…
     
-    I have two options in my mind atm:
-    
-    1. Proper, make the table know how many pages we would need to display all results for the query and load as user moves through pages. (yelp api supports `limit` and `offset` params, AND gives a `total` so we know how many results we can expect from a first call)
+    I will make the table know how many pages we would need to display all results for the query and load as user moves through pages. (yelp api supports `limit` and `offset` params, AND gives a `total` so we know how many results we can expect from a first call)
         
         In simple terms:
         Frontend: Asks for desired page or offset/limit to the backend.
         
         Backend: Pass those params to the yelp api and return results to frontend.
-        
-    2. Quick and dirty is to just load all results and send to frontend and just have “pagination” in the table view. THIS WOULD BE ONLY IF I AM RUNNING OUT OF TIME.
 
 
     ### Random comments
 
+    - Planning and preping time spent 1 hour.
     - Decided to go with axios instead of the yelp api package.
     - Cant live without hot reload!
-    - time spent on BE so far and first project pause 1 hour
+    - time spent on BE so far and first project pause after 1.5 hours
+    - Made it to the 4h mark, FE and BE look very good.
+    - I have a pending bug: after asking the yelp api for more results with an offset >230 it returns a 400
+    - Search filtered by distance is very loose, but that is on yelp side. Could verify data and crop results.
